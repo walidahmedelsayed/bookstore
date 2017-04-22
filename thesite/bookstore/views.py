@@ -3,7 +3,7 @@ from __future__ import unicode_literals
 
 from django.shortcuts import render
 
-from .models import Book
+from .models import Book,Author
 
 from django.views import generic
 
@@ -21,3 +21,7 @@ class IndexView(generic.ListView):
 class BookDetails(generic.DetailView):
     model = Book
     template_name = 'bookdetails.html'
+
+class AuthorDetails(generic.DetailView):
+    model = Author
+    template_name = 'authordetails.html'

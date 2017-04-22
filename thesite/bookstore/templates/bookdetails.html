@@ -5,7 +5,7 @@
     <pre>
         Published at : {{book.published_at }}
         Summary : {{ book.summary }}
-        Writer : {{ book.author }}
+        Author :<a href=" {% url 'bookstore:authordetails' book.author_id %} ">{{ book.author }}</a>
 
     </pre>
 
