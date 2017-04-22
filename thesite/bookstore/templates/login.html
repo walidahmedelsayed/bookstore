@@ -1,0 +1,13 @@
+{% include 'layouts/header.html' %}
+
+<form class="form-group" method="post">
+    {% csrf_token %}
+
+    {{ form.as_p }}
+
+    <input type="submit" class="btn btn-primary" value="Login"/>
+</form>
+
+<a href="{ % url 'bookstore:register' % }">Register Now</a>
+
+{% include 'layouts/footer.html' %}
