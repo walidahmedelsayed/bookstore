@@ -1,11 +1,11 @@
 {% include 'layouts/header.html' %}
 
- <h3>{{ book.name }}</h3>
-    <hr>
-    <pre>
+<h3>{{ book.name }}</h3>
+<hr>
+<pre>
         Published at : {{book.published_at }}
         Summary : {{ book.summary }}
-        Author :<a href=" {% url 'bookstore:authordetails' book.author_id %} ">{{ book.author }}</a>
+        Author : <a href=" {% url 'bookstore:authordetails' book.author_id %} ">{{ book.author }}</a>
 
     </pre>
 

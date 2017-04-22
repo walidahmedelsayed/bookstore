@@ -7,6 +7,7 @@ from .models import Book,Author
 
 from django.views import generic
 
+from .forms import UserForm
 
 # Create your views here.
 
@@ -25,3 +26,7 @@ class BookDetails(generic.DetailView):
 class AuthorDetails(generic.DetailView):
     model = Author
     template_name = 'authordetails.html'
+
+def register(request):
+    form = UserForm()
+    return render(request, 'register.html', {'form': form})
