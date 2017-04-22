@@ -1,0 +1,12 @@
+{% include 'layouts/header.html' %}
+
+ <h3>{{ book.name }}</h3>
+    <hr>
+    <pre>
+        Published at : {{book.published_at }}
+        Summary : {{ book.summary }}
+        Writer : {{ book.author }}
+
+    </pre>
+
+{% include 'layouts/footer.html' %}

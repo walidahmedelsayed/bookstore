@@ -6,6 +6,8 @@ from django.shortcuts import render
 from .models import Book
 
 from django.views import generic
+
+
 # Create your views here.
 
 class IndexView(generic.ListView):
@@ -14,3 +16,8 @@ class IndexView(generic.ListView):
 
     def get_queryset(self):
         return Book.objects.all()
+
+
+class BookDetails(generic.DetailView):
+    model = Book
+    template_name = 'bookdetails.html'
