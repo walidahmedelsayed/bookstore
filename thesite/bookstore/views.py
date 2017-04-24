@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 
 from .models import Book, Author
 
@@ -14,50 +14,60 @@ from django.contrib.auth import authenticate, login as authlogin, logout
 
 # Create your views here.
 
-class IndexView(generic.ListView):
-    template_name = 'home.html'
-    context_object_name = 'books'
+# class IndexView(generic.ListView):
+#     template_name = 'home.html'
+#     context_object_name = 'books'
+#
+#     def get_queryset(self):
+#         return Book.objects.all()
+#
+#
+# class BookDetails(generic.DetailView):
+#     model = Book
+#     template_name = 'bookdetails.html'
+#
+#
+# class AuthorDetails(generic.DetailView):
+#     model = Author
+#     template_name = 'authordetails.html'
+#
 
-    def get_queryset(self):
-        return Book.objects.all()
+def index(request):
+    books = Book.objects.all()
+    context = {
+        'books': books
+    }
+    return render(request, 'home.html', context)
 
 
-class BookDetails(generic.DetailView):
-    model = Book
-    template_name = 'bookdetails.html'
+def bookdetails(request, id):
+    book = get_object_or_404(Book, id=id)
+
+    context = {
+        'book': book,
+
+    }
+    return render(request, 'bookdetails.html', context)
 
 
-class AuthorDetails(generic.DetailView):
-    model = Author
-    template_name = 'authordetails.html'
+def authordetails(request, id):
+    author = get_object_or_404(Author, id=id)
+    context = {
+        'author': author
+    }
+    return render(request, 'authordetails.html', context)
 
 
 def register(request):
     if request.method == 'POST':
-        form = RegisterForm(request.POST)
-
-        if form.is_valid():
-            form.save()
         return redirect('bookstore:home')
+
     else:
-        form = RegisterForm()
-        return render(request, 'register.html', {'form': form})
+        return render(request, 'register.html')
 
 
 def login(request):
     if request.method == 'POST':
-        form = LoginForm(request.POST)
-        if form.is_valid():
-            email = form.cleaned_data.get('email')
-            password = form.cleaned_data.get('password')
-            user = authenticate(email=email, password=password)
-            if user is not None:
-                authlogin(request, user)
-                return redirect('bookstore:home')
-                print("hello login")
-            else:
-                return render(request, 'login.html', {'form': form})
-                print("faaaaailed")
+        return redirect('bookstore:home')
     else:
-        form = LoginForm()
-        return render(request, 'login.html', {'form': form})
+        return render(request, 'login.html')

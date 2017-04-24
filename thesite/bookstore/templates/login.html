@@ -3,7 +3,16 @@
 <form class="form-group" method="post">
     {% csrf_token %}
 
-    {{ form.as_p }}
+    <p>
+    <label for="email">Email :</label>
+    <input type="email" name="email" placeholder="email"/>
+   </p>
+
+    <p>
+    <label for="password">Password :</label>
+    <input type="password" name="password" placeholder="password"/>
+   </p>
+
 
     <input type="submit" class="btn btn-primary" value="Login"/>
 </form>
