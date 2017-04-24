@@ -3,9 +3,9 @@ from __future__ import unicode_literals
 
 from django.shortcuts import render, redirect, get_object_or_404
 
-from .models import Book, Author,User
+from .models import Book, Author, User
 
-from django.contrib.auth.hashers import make_password
+from django.contrib.auth.hashers import make_password, check_password
 
 from django.views import generic
 
@@ -71,11 +71,11 @@ def register(request):
             errors.append("Please Fill All The Fields")
         elif (password != repassword):
             errors.append("Password Mismatch")
-        
+
         if (len(errors) > 0):
-            return render(request, 'register.html', {'errors':errors})
+            return render(request, 'register.html', {'errors': errors})
         else:
-            user = User(name=name,email=email,password=make_password(password))
+            user = User(name=name, email=email, password=make_password(password))
             user.save()
             return redirect('bookstore:home')
 
@@ -85,9 +85,20 @@ def register(request):
 
 def login(request):
     if request.method == 'POST':
-        email = request.POST['email']
-        password = request.POST['password']
+        errors = []
+        email = request.POST.get('email')
+        password = request.POST.get('password')
+        user = User.objects.get(email=email)
+        if (user and check_password(password, user.password)):
+            return redirect('bookstore:home')
+        else:
+            errors.append("Invalid Email Or Password")
 
-        return redirect('bookstore:home')
+        if (len(errors) > 0):
+            return render(request, 'login.html', {'errors': errors})
+        else:
+            return redirect('bookstore:home')
+
+
     else:
         return render(request, 'login.html')

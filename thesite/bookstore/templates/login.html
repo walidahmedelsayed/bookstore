@@ -1,17 +1,23 @@
 {% include 'layouts/header.html' %}
 
+<div class="alert alert-warning">
+    {% for error in errors %}
+    <li>{{ error }}</li>
+    {% endfor %}
+</div>
+
 <form class="form-group" method="post">
     {% csrf_token %}
 
     <div>
-    <label for="email">Email :</label>
-    <input type="email" name="email" placeholder="email"/>
-   </div>
+        <label for="email">Email :</label>
+        <input type="email" name="email" placeholder="email"/>
+    </div>
 
     <div>
-    <label for="password">Password :</label>
-    <input type="password" name="password" placeholder="password"/>
-   </div>
+        <label for="password">Password :</label>
+        <input type="password" name="password" placeholder="password"/>
+    </div>
 
 
     <input type="submit" class="btn btn-primary" value="Login"/>
