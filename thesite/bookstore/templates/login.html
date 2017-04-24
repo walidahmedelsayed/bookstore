@@ -3,15 +3,15 @@
 <form class="form-group" method="post">
     {% csrf_token %}
 
-    <p>
+    <div>
     <label for="email">Email :</label>
     <input type="email" name="email" placeholder="email"/>
-   </p>
+   </div>
 
-    <p>
+    <div>
     <label for="password">Password :</label>
     <input type="password" name="password" placeholder="password"/>
-   </p>
+   </div>
 
 
     <input type="submit" class="btn btn-primary" value="Login"/>
