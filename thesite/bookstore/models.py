@@ -23,7 +23,7 @@ class Author(models.Model):
     name = models.CharField(max_length=200)
     born_at = models.DateField(blank=True)
     died_at = models.DateField(blank=True, null=True)
-
+    img = models.ImageField(upload_to='images/')
     def __str__(self):
         return self.name
 
@@ -35,14 +35,13 @@ class Book(models.Model):
     img = models.ImageField(upload_to = 'images/')
     author = models.ForeignKey('Author', on_delete=models.CASCADE, default=1)
     category = models.ForeignKey('Categories', on_delete=models.CASCADE, default=1)
-
     def __str__(self):
         return self.name
 
 
 class Categories(models.Model):
     name = models.CharField(max_length=200)
-    image = models.ImageField(upload_to="images/")
+    image = models.ImageField(upload_to="images/",blank=True)
     created_at = models.DateField(auto_now_add=True)
     updated_at = models.DateField(auto_now=True)
 

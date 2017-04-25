@@ -2,13 +2,22 @@
 
 <h3>{{ author.name }}</h3>
 <hr>
-<pre>
-        Born at : {{ author.born_at }}
-        Died at : {{ author.died_at }}
+<div class="container">
+    <div class="card" style="width: 20rem;">
+        <img class="card-img-top" src="{{author.img.url}}" alt="Card image cap" height="250" width="250"/>
 
+        <div class="card-block">
+            <p class="card-texr">
+                Born at : {{ author.born_at }}
 
-    </ul>
-    </pre>
+            </p>
+        </div>
+        <div class="card-block">
+            <p class="card-texr">
 
+                Died at : {{ author.died_at }}
+            </p>
+        </div>
+    </div>
 
-{% include 'layouts/footer.html' %}
+    {% include 'layouts/footer.html' %}

@@ -9,7 +9,4 @@ from .models import User,Book,Author,Categories
 admin.site.register(User)
 admin.site.register(Book)
 admin.site.register(Author)
-@admin.register(Categories)
-class CategoriesAdmin(admin.ModelAdmin):
-    pass
-    #exclude = ['name']
+admin.site.register(Categories)
