@@ -1,21 +1,14 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
-
 from django.shortcuts import render, redirect, get_object_or_404
-
-from .models import Book, Author, User
-
-from django.contrib.auth.hashers import make_password, check_password
-
-from django.views import generic
-
-from .forms import RegisterForm, LoginForm
-
+from .models import Book , Author
+from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login as authlogin, logout
-
+from django.contrib.auth.hashers import make_password, check_password
+from django.views import generic
+# from .forms import RegisterForm, LoginForm
 
 # Create your views here.
-
 # class IndexView(generic.ListView):
 #     template_name = 'home.html'
 #     context_object_name = 'books'
@@ -47,7 +40,6 @@ def bookdetails(request, id):
 
     context = {
         'book': book,
-
     }
     return render(request, 'bookdetails.html', context)
 
@@ -60,45 +52,78 @@ def authordetails(request, id):
     return render(request, 'authordetails.html', context)
 
 
+def generate_user(name,email,password):
+    user = User.objects.create_user(name,email,password)
+    return True
+
+
 def register(request):
     if request.method == 'POST':
         errors = []
-        name = request.POST.get('name')
+        username = request.POST.get('username')
         email = request.POST.get('email')
         password = request.POST.get('password')
         repassword = request.POST.get('repassword')
-        if (name is "" or email is "" or password is "" or repassword is ""):
+
+        if (username is "" or email is "" or password is "" or repassword is ""):
             errors.append("Please Fill All The Fields")
+
         elif (password != repassword):
             errors.append("Password Mismatch")
+
+        elif User.objects.filter(username=username).exists():
+            errors.append('Username Already Exists With The Same Name')
+
+        elif User.objects.filter(email=email).exists():
+            errors.append('Email Already Exists')
 
         if (len(errors) > 0):
             return render(request, 'register.html', {'errors': errors})
         else:
-            user = User(name=name, email=email, password=make_password(password))
-            user.save()
-            return redirect('bookstore:home')
-
+            if generate_user(username, email, password):
+                return redirect('bookstore:home')
+            else:
+                return render(request, 'register.html')
     else:
         return render(request, 'register.html')
 
 
 def login(request):
+    errors=[]
     if request.method == 'POST':
-        errors = []
-        email = request.POST.get('email')
+        email = request.POST.get('username')
         password = request.POST.get('password')
-        user = User.objects.get(email=email)
-        if (user and check_password(password, user.password)):
+        user = authenticate(username=email, password=password)
+
+        if user is not None:
+            print(user)
+            authlogin(request, user)
             return redirect('bookstore:home')
         else:
-            errors.append("Invalid Email Or Password")
-
-        if (len(errors) > 0):
-            return render(request, 'login.html', {'errors': errors})
-        else:
-            return redirect('bookstore:home')
-
+            errors.append('Invalid UserName or Password')
+            return render(request, 'login.html',{'errors':errors})
 
     else:
         return render(request, 'login.html')
+
+
+
+        # if request.method == 'POST':
+        #     errors = []
+        #     email = request.POST.get('email')
+        #     password = request.POST.get('password')
+        #     # user = User.objects.get(email=email)
+        #     # if (user and check_password(password, user.password)):
+        #     #     return redirect('bookstore:home')
+        #     # else:
+        #     #     errors.append("Invalid Email Or Password")
+        #
+        #     if (len(errors) > 0):
+        #         return render(request, 'login.html', {'errors': errors})
+        #     else:
+        #         request.session['name'] = 'moustafa'
+        #         return redirect('bookstore:home')
+        #
+        #
+        # else:
+        #     return render(request, 'login.html')
