@@ -82,10 +82,10 @@ def save_user_profile(sender, instance, **kwargs):
 class Rate(models.Model):
     profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
     book = models.ForeignKey(Book, on_delete=models.CASCADE)
-    STATES = [('read', 'Read'), ('wish', 'Wish'),('none','None')]
-    state = models.CharField(max_length=10, choices=STATES, default='none')
-    RATES = [(1, "1"), (2, "2"), (3, "3"), (4, "4"), (5, "5"), (6, "6"), (7, "7"), (8, "8"), (9, "9"), (10, "10")]
-    rate = models.CharField(max_length=2, choices=RATES)
+    STATES = [('Read', 'Read'), ('Wish', 'Wish'),('None','None')]
+    state = models.CharField(max_length=10, choices=STATES, default='None')
+    RATES = (("1", 1), ("2", 2), ("3",3), ("4",4), ("5",5), ("6",6), ("7",7), ("8",8), ("9",9), ("10",10))
+    rate = models.CharField(max_length=2, choices=RATES,default="5")
 
-    def __str__(self):
-        return self.rate
+    # def __str__(self):
+    #     return self.rate

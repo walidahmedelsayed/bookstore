@@ -12,7 +12,8 @@
   <img class="card-img-top" src="{{book.img.url}}" alt="Card image cap" height="250" width="250"/>
 
   <div class="card-block">
-    <h4 class="card-title">{{book.name}}</h4>
+      <center><h4 class="card-title"><strong>{{book.name}}</strong></h4></center>
+    <h4 class="card-title">Rating: {{ book.rate_set.first.rate }}  State: {{ book.rate_set.first.state}}</h4>
     <p class="card-text">{{book.summary}}</p>
     <a href="{% url 'bookstore:bookdetails' book.id %} " class="btn btn-primary">Book Details</a>
   </div>
