@@ -40,6 +40,7 @@ class Book(models.Model):
     summary = models.CharField(max_length=600)
     img = models.ImageField(upload_to='images/')
     author = models.ForeignKey('Author', on_delete=models.CASCADE, default=1)
+
     category = models.ForeignKey('Category', on_delete=models.CASCADE, default=1)
 
     def __str__(self):
