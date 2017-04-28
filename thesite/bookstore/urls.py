@@ -10,6 +10,7 @@ urlpatterns = [
     url(r'^bookdetails/(?P<id>[0-9]+)', views.bookdetails, name='bookdetails'),
     url(r'^authordetails/(?P<id>[0-9]+)', views.authordetails, name='authordetails'),
     url(r'^$', views.login, name='login'),
+    url(r'logout', views.logout, name='logout'),
     url(r'register', views.register, name='register'),
 ]
 

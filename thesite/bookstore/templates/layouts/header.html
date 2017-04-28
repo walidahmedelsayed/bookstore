@@ -11,8 +11,10 @@
 
     <a class="navbar-brand" href="#">Our Bookstore</a>
     <div class="collapse navbar-collapse" id="navbarText">
-
+{% if user.is_authenticated %}
         <a href="{% url 'bookstore:home' %}" class="navbar-brand">Home</a>
+        <a href="{% url 'bookstore:logout' %}" class="navbar-brand navbar-right">Logout</a>
+{% endif %}
     </div>
 </nav>
 

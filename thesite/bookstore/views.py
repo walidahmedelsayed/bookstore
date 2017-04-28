@@ -3,7 +3,8 @@ from __future__ import unicode_literals
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Book , Author
 from django.contrib.auth.models import User
-from django.contrib.auth import authenticate, login as authlogin, logout
+from django.contrib.auth import authenticate, login as authlogin, logout as authlogout
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.hashers import make_password, check_password
 from django.views import generic
 # from .forms import RegisterForm, LoginForm
@@ -28,28 +29,38 @@ from django.views import generic
 #
 
 def index(request):
-    books = Book.objects.all()
-    context = {
-        'books': books
-    }
-    return render(request, 'home.html', context)
+    if not request.user.is_authenticated():
+        return redirect('bookstore:login')
+    else:
+        books = Book.objects.all()
+        context = {
+            'books': books
+        }
+        return render(request, 'home.html', context)
 
 
 def bookdetails(request, id):
-    book = get_object_or_404(Book, id=id)
+    if not request.user.is_authenticated():
+        return redirect('bookstore:login')
+    else:
+        book = get_object_or_404(Book, id=id)
 
-    context = {
-        'book': book,
-    }
-    return render(request, 'bookdetails.html', context)
+        context = {
+            'book': book,
+        }
+        return render(request, 'bookdetails.html', context)
+
 
 
 def authordetails(request, id):
-    author = get_object_or_404(Author, id=id)
-    context = {
-        'author': author
-    }
-    return render(request, 'authordetails.html', context)
+    if not request.user.is_authenticated():
+        return redirect('bookstore:login')
+    else:
+        author = get_object_or_404(Author, id=id)
+        context = {
+            'author': author
+        }
+        return render(request, 'authordetails.html', context)
 
 
 def generate_user(name,email,password):
@@ -106,9 +117,12 @@ def login(request):
     else:
         return render(request, 'login.html')
 
+def logout(request):
+    authlogout(request)
+    return redirect('bookstore:login')
 
 
-        # if request.method == 'POST':
+    # if request.method == 'POST':
         #     errors = []
         #     email = request.POST.get('email')
         #     password = request.POST.get('password')
