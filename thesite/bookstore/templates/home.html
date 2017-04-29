@@ -1,28 +1,46 @@
 {% include 'layouts/header.html' %}
 
-<center><h3><strong>Books</strong></h3></center>
 
-<hr>
-<ul>
-    <div class="row">
-    {% for book in books %}
-        <div class="col-sm-4">
-    <div class="card" style="width: 20rem;">
-
-  <img class="card-img-top" src="{{book.img.url}}" alt="Card image cap" height="250" width="250"/>
-
-  <div class="card-block">
-      <center><h4 class="card-title"><strong>{{book.name}}</strong></h4></center>
-    <h4 class="card-title">Rating: {{ book.rate_set.first.rate }}  State: {{ book.rate_set.first.state}}</h4>
-    <p class="card-text">{{book.summary}}</p>
-    <a href="{% url 'bookstore:bookdetails' book.id %} " class="btn btn-primary">Book Details</a>
-  </div>
-</div>
-<br>
-
-        </div>
-    {% endfor %}
+ <div class="ui  stackable cards">
+     {% for book in books %}
+  <div class="card">
+    <div class="image">
+      <img src="{{book.img.url}}">
     </div>
-</ul>
+    <div class="content">
+      <a href="{% url 'bookstore:bookdetails' book.id %} " class="header">{{book.name}}</a>
+      <div class="meta">
+        <a>{{book.author.name}}</a>
+      </div>
+      <div class="description">
+        {{book.summary}}
+      </div>
+    </div>
+    <div class="extra content">
+      <span class="right floated">
+        Published in {{book.published_at}}
+
+      </span>
+      <span>
+        <i class="large thumbs up  icon"></i>
+        Rating
+        <div class="ui large star rating" data-id="{{book.id}}" data-rating="{{book.rating_set.last.rate}}"></div>
+      </span>
+    </div>
+    <div class="extra content">
+      <div class="ui buttons">
+          <button class="ui button">
+              <i class="Checkmark icon"></i>
+              Read
+          </button>
+          <div class="or"></div>
+          <button class="ui positive button">Wish</button>
+      </div>
+    </div>
+
+  </div>
+     {% endfor %}
+</div>
 
 {% include 'layouts/footer.html' %}
+
