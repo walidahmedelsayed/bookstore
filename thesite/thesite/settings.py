@@ -79,8 +79,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'bookstore',
-        'USER' : 'walid',
-        'PASSWORD' : 'walid',
+        'USER' : 'root',
+        'PASSWORD' : '123321123',
         'HOST':'',
         'PORT':''
     }
@@ -126,6 +126,23 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
 os.path.join(BASE_DIR, "static"),
+os.path.join(BASE_DIR, "media")
 ]
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+
+TEST_MEMCACHE = False
+if not DEBUG or TEST_MEMCACHE:
+    CACHES = {
+        'default': {
+        'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
+        'LOCATION': '127.0.0.1:8000',
+        }
+    }
+else:
+    CACHES = {
+        'default': {
+            'BACKEND': 'django.core.cache.backends.dummy.DummyCache',
+        }
+}
