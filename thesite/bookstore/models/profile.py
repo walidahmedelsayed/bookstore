@@ -6,7 +6,7 @@ from django.dispatch.dispatcher import receiver
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    authors = models.ManyToManyField('Author')
+    authors = models.ManyToManyField('Author', through='AuthorFollow')
     categories = models.ManyToManyField('Category')
     booksRating = models.ManyToManyField("Book", through='Rating')
 

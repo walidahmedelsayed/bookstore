@@ -6,6 +6,6 @@ class Author(models.Model):
     born_at = models.DateField(blank=True)
     died_at = models.DateField(blank=True, null=True)
     img = models.ImageField(upload_to='images/')
-
+    followedBy = models.ManyToManyField("Profile", through='AuthorFollow')
     def __str__(self):
         return self.name

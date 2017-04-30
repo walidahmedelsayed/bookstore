@@ -57,6 +57,18 @@ $('button.book-status').on('click', function() {
         })
 });
 
-
+$(function () {
+    $("#follow_btn").click(function () {
+        $.ajax({
+            type: "get",
+            url: "authordetails/follow",
+            data: { 'author_id': $(this).data('id'),
+                    'followstatus' :$(this).data('followstatus') },
+            success: function (e) {
+                alert('Success!');
+            }
+        });
+    });
+});
 // $('.rating').rating('disable');
 

@@ -1,9 +1,14 @@
 {% include 'layouts/header.html' %}
 
-
 {% for author in authors %}
 
-<li>{{author.name}}</li>
+<p>{{author.name}}
+    <button id="follow_btn" class="ui button" data-id="{{author.id}}"
+            data-followstatus="{{author.authorfollow_set.first|yesno}}">
+        {{author.authorfollow_set.first|yesno:"Unfollow,Follow"}}
+    </button>
+</p>
+
 
 {% endfor %}
 
