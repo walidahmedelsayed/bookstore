@@ -22,7 +22,14 @@
       <span>
         <i class="large thumbs up  icon"></i>
         Rating
-        <div class="ui large star rating" data-id="{{book.id}}" data-rating="0"></div>
+          {% for rate in book.rating_set.all %}
+              {% if rate.profile_id == request.user.id %}
+                  <div class="ui large star rating" data-id="{{book.id}}" data-rating="{{ rate.rate }}"></div>
+              {% endif %}
+          {% endfor %}
+          {% if book.rating_set.count == 0 %}
+              <div class="ui large star rating"  data-id="{{book.id}}" data-rating="0"></div>
+          {% endif  %}
       </span>
     </div>
     <div class="extra content">

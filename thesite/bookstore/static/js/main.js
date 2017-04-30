@@ -16,3 +16,7 @@ $('.rating').rating({
       });
     }
 });
+
+
+// $('.rating').rating('disable');
+
