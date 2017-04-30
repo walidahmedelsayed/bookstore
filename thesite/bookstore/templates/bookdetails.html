@@ -2,21 +2,21 @@
 {% include 'layouts/header.html' %}
 <div class="ui card">
   <div class="image">
-    <img src="/images/avatar2/large/kristy.png">
+    <img src="{{book.img.url}}" alt="Card image cap" height="250" width="250">
   </div>
   <div class="content">
-    <a class="header">Kristy</a>
+    <a class="header">{{book.name}}</a>
     <div class="meta">
-      <span class="date">Joined in 2013</span>
+      <span class="date">{{book.published_at}}</span>
     </div>
     <div class="description">
-      Kristy is an art director living in New York.
+      {{book.summary}}
     </div>
   </div>
   <div class="extra content">
-    <a>
+    <a  href="{% url 'bookstore:authordetails' book.author.id %}">
       <i class="user icon"></i>
-      22 Friends
+      {{book.author}}
     </a>
   </div>
 </div>
