@@ -18,7 +18,7 @@ $('.rating').rating({
 });
 
 
-$('button.book-status').on('click', function() {
+$('button.read-status').on('click', function() {
     elm = $(this);
     $(this).addClass("loading");
     $.ajax({
@@ -35,7 +35,8 @@ $('button.book-status').on('click', function() {
                 {
                     setTimeout(function(){
                         elm.removeClass("loading");
-                        elm.append('<i class="Checkmark icon"></i>');
+                        elm.prepend('<i class="Checkmark icon"></i>');
+                        elm.siblings('button.wish-status').find('i.Checkmark').remove();
                         setTimeout(function(){
                             //window.location.href = "/bookdetails/"+elm.data('id');
                         }, 1000);
@@ -56,6 +57,52 @@ $('button.book-status').on('click', function() {
 
         })
 });
+
+
+
+
+$('button.wish-status').on('click', function() {
+    elm = $(this);
+    $(this).addClass("loading");
+    $.ajax({
+        url: "bookdetails/wish",
+        data: {
+            status: 3,
+            book: $(this).data('id')
+        },
+        method: 'GET'
+    })
+        .done(function (msg) {
+            if (msg) {
+                if(msg.read)
+                {
+                    setTimeout(function(){
+                        elm.removeClass("loading");
+                        elm.prepend('<i class="Checkmark icon"></i>');
+                        elm.siblings('button.read-status').find('i.Checkmark').remove();
+                        setTimeout(function(){
+                            //window.location.href = "/bookdetails/"+elm.data('id');
+                        }, 1000);
+                    }, 1000);
+                }
+                else {
+                    setTimeout(function(){
+                        elm.removeClass("loading");
+                        elm.find('i.Checkmark').remove();
+                    }, 1000);
+                }
+            }
+        })
+        .fail(function (error) {
+            if (error){
+                console.log(error);
+            }
+
+        })
+});
+
+
+
 
 $(function () {
     $("#follow_btn").click(function () {
