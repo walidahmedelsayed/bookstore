@@ -115,12 +115,16 @@ $('div.button.author-follow').click(function () {
                     setTimeout(function () {
                         elm.removeClass("loading");
                         elm.children('i.add').removeClass("add").addClass("remove");
+                        elm.children('span').text("Un Follow")
+
                     }, 1000);
                 }
                 else {
                     setTimeout(function () {
                         elm.removeClass("loading");
                         elm.children('i.remove').removeClass("remove").addClass("add");
+                        console.log(elm.children('span'));
+                        elm.children('span').text("Follow")
                     }, 1000);
                 }
             }
