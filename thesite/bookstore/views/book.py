@@ -3,12 +3,12 @@ from ..models import Book
 from inspect import getmembers
 from pprint import pprint
 
+
 def books(request):
     if not request.user.is_authenticated():
         return redirect('bookstore:login')
     else:
         books = Book.objects.all()
-        print(books[1].status_set.count())
         context = {
             'books': books
         }

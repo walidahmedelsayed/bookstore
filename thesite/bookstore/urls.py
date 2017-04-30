@@ -12,6 +12,7 @@ urlpatterns = [
     url(r'^authors$', views.getauthors,name='authors'),
     url(r'^bookdetails/(?P<id>[0-9]+)$', views.bookdetails, name='bookdetails'),
     url(r'^authordetails/(?P<id>[0-9]+)$', views.authordetails, name='authordetails'),
+    url(r'^categorybooks/(?P<id>[0-9]+)$', views.getCategory, name='categorybooks'),
     url(r'^login$', views.login, name='login'),
     url(r'logout$', views.logout, name='logout'),
     url(r'register$', views.register, name='register'),

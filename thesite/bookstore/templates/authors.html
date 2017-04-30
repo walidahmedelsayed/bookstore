@@ -1,4 +1,5 @@
 {% include 'layouts/header.html' %}
+<<<<<<< HEAD
 
 
  <div class="ui  stackable cards">
@@ -23,5 +24,28 @@
     </div>
      {% endfor %}
 </div>
+=======
+{% if authors %}
+{% for author in authors %}
+
+<p>{{author.name}}
+
+    <button id="follow_btn" class="ui button" data-id="{{author.id}}"
+            data-followstatus="{{author.authorfollow_set.first.followStatus }}">
+        {% if current_user  in author.authorfollow_set.all %}
+        Follow
+        {% else %}
+        UnFollow
+        {% endif %}
+
+    </button>
+</p>
+
+{% endfor %}
+{% else %}
+There Is No Authors Yet
+
+{% endif %}
+>>>>>>> 35351d4bafcc1aa6f00351c8a6242bc2d029b8fd
 
 {% include 'layouts/footer.html' %}
