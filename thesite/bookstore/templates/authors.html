@@ -1,5 +1,5 @@
 {% include 'layouts/header.html' %}
-
+{% if authors %}
 {% for author in authors %}
 
 <p>{{author.name}}
@@ -15,8 +15,10 @@
     </button>
 </p>
 
-
 {% endfor %}
+{% else %}
+There Is No Authors Yet
 
+{% endif %}
 
 {% include 'layouts/footer.html' %}

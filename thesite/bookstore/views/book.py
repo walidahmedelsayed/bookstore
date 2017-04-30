@@ -8,7 +8,6 @@ def books(request):
         return redirect('bookstore:login')
     else:
         books = Book.objects.all()
-        print(books[1].status_set.count())
         context = {
             'books': books
         }

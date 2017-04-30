@@ -1,6 +1,6 @@
 {% include 'layouts/header.html' %}
 
-
+{% if books %}
  <div class="ui  stackable cards">
      {% for book in books %}
   <div class="card">
@@ -60,5 +60,8 @@
   </div>
      {% endfor %}
 </div>
+{% else %}
+ There Is No Books Yet
+{% endif %}
 
 {% include 'layouts/footer.html' %}
