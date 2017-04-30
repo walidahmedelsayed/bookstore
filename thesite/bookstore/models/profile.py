@@ -8,7 +8,9 @@ class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     authors = models.ManyToManyField('Author', through='AuthorFollow')
     categories = models.ManyToManyField('Category')
-    booksRating = models.ManyToManyField("Book", through='Rating')
+    booksRating = models.ManyToManyField("Book",related_name="booksRating", through='Rating')
+    booksStatus = models.ManyToManyField("Book",related_name="booksStatus",  through='Status')
+
 
     def __str__(self):
         return self.user.email

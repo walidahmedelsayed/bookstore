@@ -11,6 +11,6 @@ class Status(models.Model):
         (WISH_STATUS, 'wish'),
     )
     book = models.ForeignKey("Book", on_delete=models.CASCADE,default=1)
-    profile = models.ForeignKey("Profile", on_delete=models.CASCADE,default=1)
+    profile = models.ForeignKey("Profile",related_name="statusProfile",  on_delete=models.CASCADE,default=1)
     status = models.IntegerField(choices=STATUS_CHOICES, default=UNREAD_STATUS)
     date = models.DateField(default=0)

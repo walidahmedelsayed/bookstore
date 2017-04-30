@@ -16,8 +16,32 @@ def read(request):
         return JsonResponse({'read': True}, safe=False)
     else:
         obj = Status.objects.get(id=read[0].id)
-        if obj.status == 1:
+        if obj.status == 1 or obj.status == 3:
             obj.status = 2
+            obj.date = now()
+            obj.save()
+            return JsonResponse({'read': True}, safe=False)
+        else:
+            obj.status = 1
+            obj.date = now()
+            obj.save()
+        return JsonResponse({'read': False}, safe=False)
+
+
+def wish(request):
+    wish = Status.objects.filter(book_id=request.GET['book'],profile_id=request.user.id)
+    if wish.count() == 0 :
+        Status.objects.create(status=request.GET['status'],
+                                     date= now(),
+                                     book_id=request.GET['book'],
+                                     profile_id=request.user.id
+                                     )
+
+        return JsonResponse({'read': True}, safe=False)
+    else:
+        obj = Status.objects.get(id=wish[0].id)
+        if obj.status == 1 or obj.status == 2:
+            obj.status = 3
             obj.date = now()
             obj.save()
             return JsonResponse({'read': True}, safe=False)

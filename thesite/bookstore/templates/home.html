@@ -38,18 +38,27 @@
     </div>
     <div class="extra content">
       <div class="ui buttons">
-          <button data-id="{{book.id}}"  class="ui button book-status">
-{#              <i class="Checkmark icon"></i>#}
-              Read
+          <button data-id="{{book.id}}"  class="ui button read-status">
+          {% for status in book.status_set.all %}
+              {% if status.profile_id == request.user.id and status.status == 2 %}
+                  <i class="Checkmark icon"></i>
+              {% endif %}
+          {% endfor %}
+              <span>Read</span>
           </button>
           <div class="or"></div>
-          <button data-id="{{book.id}}" class="ui positive button wish">Wish</button>
+          <button data-id="{{book.id}}" class="ui positive button wish-status">
+          {% for status in book.status_set.all %}
+                {% if status.profile_id == request.user.id and status.status == 3 %}
+                  <i class="Checkmark icon"></i>
+                {% endif %}
+          {% endfor %}
+              Wish
+          </button>
       </div>
     </div>
-
   </div>
      {% endfor %}
 </div>
 
 {% include 'layouts/footer.html' %}
-
