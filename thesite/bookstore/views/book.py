@@ -1,11 +1,14 @@
 from django.shortcuts import redirect, render, get_object_or_404
 from ..models import Book
+from inspect import getmembers
+from pprint import pprint
 
 def books(request):
     if not request.user.is_authenticated():
         return redirect('bookstore:login')
     else:
         books = Book.objects.all()
+        pprint(getmembers(books[0].rating_set))
         context = {
             'books': books
         }

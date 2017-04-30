@@ -24,17 +24,26 @@
       <span>
         <i class="large thumbs up  icon"></i>
         Rating
-        <div class="ui large star rating" data-id="{{book.id}}" data-rating="{{book.rating_set.last.rate}}"></div>
+
+          {% for rate in book.rating_set.all %}
+              {% if rate.profile_id == request.user.id %}
+                  <div class="ui large star rating" data-id="{{book.id}}" data-rating="{{ rate.rate }}"></div>
+              {% endif %}
+          {% endfor %}
+          {% if book.rating_set.count == 0 %}
+              <div class="ui large star rating"  data-id="{{book.id}}" data-rating="0"></div>
+          {% endif  %}
+
       </span>
     </div>
     <div class="extra content">
       <div class="ui buttons">
-          <button class="ui button">
-              <i class="Checkmark icon"></i>
+          <button data-id="{{book.id}}"  class="ui button book-status">
+{#              <i class="Checkmark icon"></i>#}
               Read
           </button>
           <div class="or"></div>
-          <button class="ui positive button">Wish</button>
+          <button data-id="{{book.id}}" class="ui positive button wish">Wish</button>
       </div>
     </div>
 

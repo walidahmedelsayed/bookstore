@@ -16,3 +16,47 @@ $('.rating').rating({
       });
     }
 });
+
+
+$('button.book-status').on('click', function() {
+    elm = $(this);
+    $(this).addClass("loading");
+    $.ajax({
+        url: "bookdetails/read",
+        data: {
+            status: 2,
+            book: $(this).data('id')
+        },
+        method: 'GET'
+    })
+        .done(function (msg) {
+            if (msg) {
+                if(msg.read)
+                {
+                    setTimeout(function(){
+                        elm.removeClass("loading");
+                        elm.append('<i class="Checkmark icon"></i>');
+                        setTimeout(function(){
+                            //window.location.href = "/bookdetails/"+elm.data('id');
+                        }, 1000);
+                    }, 1000);
+                }
+                else {
+                    setTimeout(function(){
+                        elm.removeClass("loading");
+                        elm.find('i.Checkmark').remove();
+                    }, 1000);
+                }
+            }
+        })
+        .fail(function (error) {
+            if (error){
+                console.log(error);
+            }
+
+        })
+});
+
+
+// $('.rating').rating('disable');
+
