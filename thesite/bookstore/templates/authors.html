@@ -1,22 +1,27 @@
 {% include 'layouts/header.html' %}
 
-{% for author in authors %}
 
-<p>{{author.name}}
-
-    <button id="follow_btn" class="ui button" data-id="{{author.id}}"
-            data-followstatus="{{author.authorfollow_set.first.followStatus }}">
-        {% if current_user  in author.authorfollow_set.all %}
-        Follow
-        {% else %}
-        UnFollow
-        {% endif %}
-
-    </button>
-</p>
-
-
-{% endfor %}
-
+ <div class="ui  stackable cards">
+    {% for author in authors %}
+    <div class="card">
+    <div class="image">
+      <img src="{{author.img.url}}">
+    </div>
+    <div class="content">
+      <a href="{% url 'bookstore:bookdetails' author.id %} " class="header">{{author.name}}</a>
+    </div>
+        <div class="ui bottom attached button primary author-follow" data-id="{{ author.id }}">
+            {% for status in author.authorfollow_set.all %}
+                {% if status.profile_id == request.user.id and status.followStatus == 0 %}
+                    <i class="add user large  icon"></i>
+                {% else %}
+                    <i class="remove user large  icon"></i>
+                {% endif %}
+            {% endfor %}
+            Follow
+        </div>
+    </div>
+     {% endfor %}
+</div>
 
 {% include 'layouts/footer.html' %}
