@@ -3,8 +3,9 @@
 
 {% for category in categories %}
 <p>
-    <img src="{{category.image.url}}" alt="Card image cap" height="250" width="250">
-<a href="{% url 'bookstore:categorybooks' category.id %} " >{{category.name}}</a>
+
+<a href="{% url 'bookstore:categorybooks' category.id %} " >
+    <img src="{{category.image.url}}" alt="Card image cap" height="150" width="150"><br>{{category.name}}</a>
 </p>
 {% endfor %}
 
