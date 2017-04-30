@@ -13,6 +13,7 @@ urlpatterns = [
     url(r'logout$', views.logout, name='logout'),
     url(r'register$', views.register, name='register'),
     url(r'bookdetails/rate', views.rate, name='rate'),
+    url(r'bookdetails/read', views.read, name='read'),
     url(r'^$', views.home, name='site'),
 ]
 
