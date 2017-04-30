@@ -3,9 +3,15 @@
 {% for author in authors %}
 
 <p>{{author.name}}
+
     <button id="follow_btn" class="ui button" data-id="{{author.id}}"
-            data-followstatus="{{author.authorfollow_set.first|yesno}}">
-        {{author.authorfollow_set.first|yesno:"Unfollow,Follow"}}
+            data-followstatus="{{author.authorfollow_set.first.followStatus }}">
+        {% if current_user  in author.authorfollow_set.all %}
+        Follow
+        {% else %}
+        UnFollow
+        {% endif %}
+
     </button>
 </p>
 

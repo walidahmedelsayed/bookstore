@@ -17,7 +17,9 @@ def getauthors(request):
         return redirect('bookstore:login')
     else:
         authors = Author.objects.all()
+        current_user = request.user
         context = {
-            'authors' : authors
+            'authors' : authors,
+            'current_user' : current_user
         }
         return render(request , 'authors.html', context)
