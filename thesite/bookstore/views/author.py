@@ -11,3 +11,13 @@ def authordetails(request, id):
             'author': author
         }
         return render(request, 'authordetails.html', context)
+
+def getauthors(request):
+    if not request.user.is_authenticated():
+        return redirect('bookstore:login')
+    else:
+        authors = Author.objects.all()
+        context = {
+            'authors' : authors
+        }
+        return render(request , 'authors.html', context)

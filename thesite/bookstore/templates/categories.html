@@ -1,0 +1,11 @@
+{% include 'layouts/header.html' %}
+
+
+{% for category in categories %}
+
+<li>{{category.name}}</li>
+
+{% endfor %}
+
+
+{% include 'layouts/footer.html' %}

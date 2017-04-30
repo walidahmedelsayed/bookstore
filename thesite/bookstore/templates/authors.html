@@ -1,0 +1,11 @@
+{% include 'layouts/header.html' %}
+
+
+{% for author in authors %}
+
+<li>{{author.name}}</li>
+
+{% endfor %}
+
+
+{% include 'layouts/footer.html' %}

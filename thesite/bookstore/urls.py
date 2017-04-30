@@ -8,6 +8,8 @@ app_name = 'bookstore'
 urlpatterns = [
 
     url(r'^books$', views.books,name='home'),
+    url(r'^categories$', views.getCategories,name='categories'),
+    url(r'^authors$', views.getauthors,name='authors'),
     url(r'^bookdetails/(?P<id>[0-9]+)$', views.bookdetails, name='bookdetails'),
     url(r'^authordetails/(?P<id>[0-9]+)$', views.authordetails, name='authordetails'),
     url(r'^login$', views.login, name='login'),

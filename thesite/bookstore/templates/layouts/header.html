@@ -11,12 +11,21 @@
 <body>
 <div class="ui attached stackable menu">
     <div class="ui container">
+         {% if user.is_authenticated %}
         <a href="{% url 'bookstore:site' %}" class="item">
             <i class="home icon"></i> Home
         </a>
-        {% if user.is_authenticated %}
+
         <a href="{% url 'bookstore:home' %}" class="item">
             <i class="book icon"></i> Book Store
+        </a>
+
+        <a href="{% url 'bookstore:categories' %}" class="item">
+            <i class="book icon"></i> Categories
+        </a>
+
+        <a href="{% url 'bookstore:authors' %}" class="item">
+            <i class="book icon"></i> Authors
         </a>
         {% endif %}
         <div class="right item">
