@@ -9,7 +9,7 @@
       <img src="{{author.img.url}}">
     </div>
     <div class="content">
-      <a href="{% url 'bookstore:bookdetails' author.id %} " class="header">{{author.name}}</a>
+      <a href="{% url 'bookstore:authordetails' author.id %} " class="header">{{author.name}}</a>
     </div>
         <div class="ui bottom attached button primary author-follow" data-id="{{ author.id }}">
             {% for status in author.authorfollow_set.all %}
