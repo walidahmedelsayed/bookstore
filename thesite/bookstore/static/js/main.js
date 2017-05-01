@@ -123,7 +123,6 @@ $('div.button.author-follow').click(function () {
                     setTimeout(function () {
                         elm.removeClass("loading");
                         elm.children('i.remove').removeClass("remove").addClass("add");
-                        console.log(elm.children('span'));
                         elm.children('span').text("Follow")
                     }, 1000);
                 }
@@ -135,17 +134,6 @@ $('div.button.author-follow').click(function () {
             }
 
         })
-    // $.ajax({
-    //     type: "get",
-    //     url: "authordetails/follow",
-    //     data: {
-    //         'author_id': $(this).data('id'),
-    //         'followstatus': $(this).data('followstatus')
-    //     },
-    //     success: function (e) {
-    //         alert('Success!');
-    //     }
-    // });
 });
 // $('.rating').rating('disable');
 

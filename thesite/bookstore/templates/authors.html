@@ -1,5 +1,5 @@
 {% include 'layouts/header.html' %}
-
+{% load followTag  %}
 {% if authors %}
 
  <div class="ui  stackable cards">
@@ -12,15 +12,7 @@
       <a href="{% url 'bookstore:bookdetails' author.id %} " class="header">{{author.name}}</a>
     </div>
         <div class="ui bottom attached button primary author-follow" data-id="{{ author.id }}">
-            {% for status in author.authorfollow_set.all %}
-                {% if status.profile_id == request.user.id and status.followStatus == 0 %}
-                    <i class="add user large  icon"></i>
-                    <span>Follow</span>
-                {% else %}
-                    <i class="remove user large  icon"></i>
-                    <span>Un Follow</span>
-                {% endif %}
-            {% endfor %}
+            {%   get_follow request.user author %}
         </div>
     </div>
      {% endfor %}
@@ -28,5 +20,4 @@
 {% else %}
 There Is No Authors Yet
 {% endif %}
-
 {% include 'layouts/footer.html' %}

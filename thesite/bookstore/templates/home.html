@@ -1,5 +1,5 @@
 {% include 'layouts/header.html' %}
-
+{% load userRatingTag  %}
 {% if books %}
  <div class="ui  stackable cards">
      {% for book in books %}
@@ -24,16 +24,7 @@
       <span>
         <i class="large thumbs up  icon"></i>
         Rating
-
-          {% for rate in book.rating_set.all %}
-              {% if rate.profile_id == request.user.id %}
-                  <div class="ui large star rating" data-id="{{book.id}}" data-rating="{{ rate.rate }}"></div>
-              {% endif %}
-          {% endfor %}
-          {% if book.rating_set.count == 0 %}
-              <div class="ui large star rating"  data-id="{{book.id}}" data-rating="0"></div>
-          {% endif  %}
-
+          {%   get_user_rate request.user book %}
       </span>
     </div>
     <div class="extra content">

@@ -7,3 +7,6 @@ class AuthorFollow(models.Model):
 
     def __str__(self):
         return self.followStatus
+
+    def get_follow_status(self):
+        print (self)

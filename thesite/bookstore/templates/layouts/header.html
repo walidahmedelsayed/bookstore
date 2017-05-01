@@ -12,20 +12,22 @@
 <div class="ui inverted attached stackable menu">
     <div class="ui container">
          {% if user.is_authenticated %}
-        <a href="{% url 'bookstore:site' %}" class="item">
-            <i class="home icon"></i> Home
+        <a href="{% url 'bookstore:site' %}" class="{% if request.get_full_path == "/" %} active {% endif %}
+item">
+            <i class="loading home icon"></i> Home
         </a>
 
-        <a href="{% url 'bookstore:home' %}" class="item">
-            <i class="book icon"></i> Book Store
+        <a href="{% url 'bookstore:home' %}" class="{% if request.get_full_path == "/books" %} active {% endif %}item">
+            <i class="loading book icon"></i> Book Store
         </a>
 
-        <a href="{% url 'bookstore:categories' %}" class="item">
-            <i class="book icon"></i> Categories
+        <a href="{% url 'bookstore:categories' %}" class="item{% if request.get_full_path == "/categories" %} active {% endif %}">
+            <i class="loading Block Layout icon"></i>
+            Categories
         </a>
 
-        <a href="{% url 'bookstore:authors' %}" class="item">
-            <i class="book icon"></i> Authors
+        <a href="{% url 'bookstore:authors' %}" class="item{% if request.get_full_path == "/authors" %} active {% endif %}">
+            <i class="loading users icon"></i> Authors
         </a>
         {% endif %}
         <div class="right item">
